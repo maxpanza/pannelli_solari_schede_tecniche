@@ -352,85 +352,7 @@
 </div>
 
 <script>
-// ============================================================
-// YOUR DATA — edit this array to add/remove panels
-// In production, move this to a separate panels.json file
-// and fetch it with: fetch('panels.json').then(r => r.json())
-// ============================================================
-const panels = [
-    {
-        produttore: "SunPower",
-        modello: "Maxeon 6",
-        potenza_watt: 420,
-        efficienza: 22.8,
-        anno: 2024,
-        descrizione: "Pannello residenziale ad alta efficienza, ottima resa in condizioni di scarsa luminosità. Tecnologia back-contact.",
-        pdf: "datasheets/sunpower-maxeon6.pdf"
-    },
-    {
-        produttore: "LONGi",
-        modello: "Hi-MO 7",
-        potenza_watt: 580,
-        efficienza: 22.5,
-        anno: 2024,
-        descrizione: "Modulo HPBC di seconda generazione per impianti commerciali e utility-scale. Celle tipo N.",
-        pdf: "datasheets/longi-himo7.pdf"
-    },
-    {
-        produttore: "Trina Solar",
-        modello: "Vertex S+",
-        potenza_watt: 445,
-        efficienza: 22.2,
-        anno: 2023,
-        descrizione: "Modulo residenziale compatto con tecnologia n-type i-TOPCon. Buona resistenza alla degradazione.",
-        pdf: "datasheets/trina-vertex-s-plus.pdf"
-    },
-    {
-        produttore: "JA Solar",
-        modello: "DeepBlue 4.0 Pro",
-        potenza_watt: 565,
-        efficienza: 22.0,
-        anno: 2024,
-        descrizione: "Modulo bifacciale con tecnologia n-type. Adatto a installazioni a terra e su tetto commerciale.",
-        pdf: "datasheets/jasolar-deepblue4pro.pdf"
-    },
-    {
-        produttore: "Canadian Solar",
-        modello: "HiHero",
-        potenza_watt: 440,
-        efficienza: 22.5,
-        anno: 2024,
-        descrizione: "Pannello residenziale con celle HJT (eterogiunzione). Design completamente nero, alta resa energetica.",
-        pdf: "datasheets/canadian-hihero.pdf"
-    },
-    {
-        produttore: "REC",
-        modello: "Alpha Pure-R",
-        potenza_watt: 430,
-        efficienza: 22.3,
-        anno: 2023,
-        descrizione: "Celle HJT con interconnessione avanzata. Garanzia 25 anni su prodotto e prestazioni. Basso coefficiente termico.",
-        pdf: "datasheets/rec-alpha-pure-r.pdf"
-    },
-    {
-        produttore: "Meyer Burger",
-        modello: "Glass",
-        potenza_watt: 395,
-        efficienza: 21.0,
-        anno: 2023,
-        descrizione: "Prodotto in Europa con tecnologia HJT e SmartWire. Design elegante completamente nero per il residenziale.",
-        pdf: "datasheets/meyerburger-glass.pdf"
-    },
-    {
-        produttore: "Jinko Solar",
-        modello: "Tiger Neo 72HL4",
-        potenza_watt: 575,
-        efficienza: 22.3,
-        anno: 2024,
-        descrizione: "Modulo n-type TOPCon ad alta potenza per impianti utility-scale. Eccellente resa in climi caldi.",
-        pdf: "datasheets/jinko-tigerneo72.pdf"
-    }
-];
+let panels = [];
 
 // --- DOM refs ---
 const searchInput = document.getElementById('searchInput');
@@ -442,6 +364,19 @@ const cardsGrid = document.getElementById('cardsGrid');
 const emptyState = document.getElementById('emptyState');
 const statsBar = document.getElementById('statsBar');
 
+// --- Load data from JSON file ---
+fetch('pannelli_solari.json')
+    .then(r => r.json())
+    .then(data => {
+        panels = data;
+        populateFilters();
+        applyFilters();
+    })
+    .catch(err => {
+        statsBar.textContent = 'Errore nel caricamento dei dati.';
+        console.error(err);
+    });
+
 // --- Populate filter dropdowns ---
 function populateFilters() {
     const produttori = [...new Set(panels.map(p => p.produttore))].sort();
@@ -452,7 +387,7 @@ function populateFilters() {
         filterProduttore.appendChild(opt);
     });
 
-    const anni = [...new Set(panels.map(p => p.anno))].sort((a, b) => b - a);
+    const anni = [...new Set(panels.map(p => p.anno).filter(a => a !== null))].sort((a, b) => b - a);
     anni.forEach(year => {
         const opt = document.createElement('option');
         opt.value = year;
@@ -475,12 +410,13 @@ function renderCards(filtered) {
     statsBar.textContent = filtered.length + ' pannell' + (filtered.length === 1 ? 'o trovato' : 'i trovati') + ' su ' + panels.length;
 
     filtered.forEach(panel => {
+        const annoDisplay = panel.anno ? panel.anno : '—';
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
             <div class="card-header">
                 <span class="card-manufacturer">${panel.produttore}</span>
-                <span class="card-year">${panel.anno}</span>
+                <span class="card-year">${annoDisplay}</span>
             </div>
             <div class="card-model">${panel.modello}</div>
             <div class="card-description">${panel.descrizione}</div>
@@ -512,9 +448,8 @@ function applyFilters() {
     const efficienzaMin = filterEfficienzaMin.value;
 
     const filtered = panels.filter(p => {
-        // text search across multiple fields
         if (query) {
-            const haystack = [p.produttore, p.modello, p.descrizione, String(p.potenza_watt), String(p.efficienza), String(p.anno)].join(' ').toLowerCase();
+            const haystack = [p.produttore, p.modello, p.descrizione, String(p.potenza_watt), String(p.efficienza), String(p.anno || '')].join(' ').toLowerCase();
             if (!haystack.includes(query)) return false;
         }
         if (produttore && p.produttore !== produttore) return false;
@@ -533,10 +468,6 @@ filterProduttore.addEventListener('change', applyFilters);
 filterAnno.addEventListener('change', applyFilters);
 filterPotenzaMin.addEventListener('change', applyFilters);
 filterEfficienzaMin.addEventListener('change', applyFilters);
-
-// --- Init ---
-populateFilters();
-applyFilters();
 </script>
 
 </body>
