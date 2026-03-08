@@ -1,0 +1,1 @@
+# pannelli_solari_schede_tecniche
