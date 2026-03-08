@@ -6,7 +6,7 @@
     "efficienza": 21.0,
     "anno": 2022,
     "descrizione": "Modulo fotovoltaico in vetro-lamina con celle monocristalline PERC ad alta efficienza. Resistente ad ammoniaca, salsedine e agenti atmosferici. Protezione Anti-PID e ottimo comportamento con bassa irradianza. Garanzia prodotto 15 anni e 25 anni sulle prestazioni.",
-    "pdf": "SOLARWATT-Panel-classic-H-1.1-pure-375-380-Wp.pdf"
+    "pdf": "schede_tecniche/SOLARWATT-Panel-classic-H-1.1-pure-375-380-Wp.pdf"
   },
   {
     "produttore": "TOPSUN",
@@ -15,7 +15,7 @@
     "efficienza": 17.6,
     "anno": null,
     "descrizione": "Modulo monocristallino da 96 celle con vetro temperato a basso contenuto di ferro e tecnologia antiriflesso. Cornice in lega di alluminio anodizzato. Disponibile in una gamma da 415 a 450 Wp. Garanzia sulla potenza al 90% per 10 anni e all'80% per 25 anni.",
-    "pdf": "scheda_tecnica_2.pdf"
+    "pdf": "schede_tecniche/scheda_tecnica_2.pdf"
   },
   {
     "produttore": "Hanwha Q CELLS",
@@ -24,6 +24,6 @@
     "efficienza": 15.9,
     "anno": 2013,
     "descrizione": "Modulo fotovoltaico in silicio policristallino di terza generazione. Dotato di tecnologia Anti-PID, Hot-Spot Protect e certificazione VDE Quality Tested. Ottimo comportamento con bassa irradianza e alta temperatura. Degrado annuo non superiore allo 0,6% con garanzia lineare sulle prestazioni per 25 anni.",
-    "pdf": "scheda_tecnica_3.pdf"
+    "pdf": "schede_tecniche/scheda_tecnica_3.pdf"
   }
 ]
