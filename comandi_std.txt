@@ -1,0 +1,88 @@
+
+----- Terminale -----
+
+Navigazione nel terminale
+
+↑ / ↓ — Scorri la cronologia dei comandi già usati
+Tab — Autocompleta nomi di file, cartelle o comandi (usalo sempre, eviti typo e risparmi tempo)
+
+----------
+
+COMANDI BASE
+
+ls — list = elenca file e cartelle nella directory corrente
+
+	ls -a → mostra anche i file nascosti (quelli che iniziano con .)
+
+
+cd — change directory = spostati in una cartella
+
+	cd nomecartella → entra nella cartella
+	cd .. → torna su di un livello
+	cd ~ → vai alla home
+	cd - → torna alla directory precedente
+
+
+pwd — print working directory = mostra il percorso completo di dove sei adesso
+
+mkdir — make directory = crea una cartella
+
+	mkdir nomecartella
+
+
+rm — remove = elimina file o cartelle ⚠️ non va nel cestino, è permanente
+
+	rm nomefile
+	rm -r nomecartella → elimina una cartella e tutto il suo contenuto (-r = recursive)
+
+
+mv — move = sposta o rinomina un file/cartella
+
+	mv vecchionome nuovonome → rinomina
+	mv file.txt cartella/ → sposta
+
+
+cat — concatenate = stampa il contenuto di un file nel terminale
+
+	cat file.txt
+
+
+open — apre un file o una cartella con l'app predefinita (macOS)
+
+	open . → apre la cartella corrente nel Finder
+	open file.pdf
+
+
+
+
+
+----- GIT -----
+
+Git — cos'è e a cosa serve
+
+Git è un sistema di version control: tiene traccia di tutte le modifiche che fai al codice nel tempo. Puoi tornare a versioni precedenti, lavorare in parallelo su più funzionalità (branch), e collaborare con altri senza sovrascriversi.
+
+Il flusso base è: ti aggiorni con le modifiche fatte da altri (git pull)  → modifichi file → dici a git cosa vuoi salvare (git add) → crei uno "snapshot" (git commit) → lo mandi online (git push).
+
+----------
+
+COMANDI GIT
+
+git status — mostra lo stato attuale: quali file sono stati modificati, quali sono "staged" (pronti per il commit), quali non sono ancora tracciati
+
+git add — aggiunge file all'area di staging (la "lista della spesa" prima del commit)
+
+	git add nomefile.txt → aggiunge un file specifico
+	git add --all → aggiunge tutto, inclusi i file rimossi
+
+
+git commit -m "testo" — commit = crea uno snapshot del progetto in quel momento. Il messaggio deve descrivere brevemente cosa hai fatto
+
+git pull — scarica e integra le modifiche dal repository remoto (es. GitHub). Da fare prima di iniziare a lavorare per essere aggiornati
+
+git push — carica i tuoi commit sul repository remoto
+
+
+git log — mostra la cronologia dei commit (autore, data, messaggio)
+
+	git log --oneline → versione compatta, un commit per riga
