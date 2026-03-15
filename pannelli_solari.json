@@ -27,12 +27,12 @@
     "pdf": "schede_tecniche/scheda_tecnica_3.pdf"
   },
   {
-    "produttore": "ja solar",
-    "modello": "jas54d40",
+    "produttore": "JA Solar",
+    "modello": "JAM54D40-440/LB",
     "potenza_watt": 440,
-    "efficienza": 15.9,
-    "anno": 2013,
-    "descrizione": "Modulo fotovoltaico in silicio policristallino di terza generazione. Dotato di tecnologia Anti-PID, Hot-Spot Protect e certificazione VDE Quality Tested. Ottimo comportamento con bassa irradianza e alta temperatura. Degrado annuo non superiore allo 0,6% con garanzia lineare sulle prestazioni per 25 anni.",
-    "pdf": "schede_tecniche/scheda_tecnica_3.pdf"
+    "efficienza": 22.0,
+    "anno": null,
+    "descrizione": "Modulo fotovoltaico bifacciale a doppio vetro con celle n-type DEEP BLUE 4.0, tecnologia MBB Half-Cell a 16 busbar e 54 celle dimezzate. Efficienza del modulo del 22%. Basso degrado garantito: 1% al primo anno e 0,4% annuo per 30 anni. Bifaccialità all'80%±5%. Certificazioni IEC 61215, IEC 61730, UL 61215, UL 61730. Garanzia prodotto 12 anni e garanzia lineare sulle prestazioni per 30 anni.",
+    "pdf": "schede_tecniche/JA.pdf"
   }
 ]
