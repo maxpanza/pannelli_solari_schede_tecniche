@@ -25,5 +25,14 @@
     "anno": 2013,
     "descrizione": "Modulo fotovoltaico in silicio policristallino di terza generazione. Dotato di tecnologia Anti-PID, Hot-Spot Protect e certificazione VDE Quality Tested. Ottimo comportamento con bassa irradianza e alta temperatura. Degrado annuo non superiore allo 0,6% con garanzia lineare sulle prestazioni per 25 anni.",
     "pdf": "schede_tecniche/scheda_tecnica_3.pdf"
+  },
+  {
+    "produttore": "ja solar",
+    "modello": "jas54d40",
+    "potenza_watt": 440,
+    "efficienza": 15.9,
+    "anno": 2013,
+    "descrizione": "Modulo fotovoltaico in silicio policristallino di terza generazione. Dotato di tecnologia Anti-PID, Hot-Spot Protect e certificazione VDE Quality Tested. Ottimo comportamento con bassa irradianza e alta temperatura. Degrado annuo non superiore allo 0,6% con garanzia lineare sulle prestazioni per 25 anni.",
+    "pdf": "schede_tecniche/scheda_tecnica_3.pdf"
   }
 ]
