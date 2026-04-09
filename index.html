@@ -505,6 +505,360 @@
             color: var(--ink-300);
         }
 
+        /* --- COMPARE BUTTON ON CARD --- */
+        .card-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .compare-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.55rem 0.9rem;
+            border: 1.5px solid var(--ink-100);
+            background: transparent;
+            color: var(--ink-500);
+            border-radius: var(--radius);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .compare-btn:hover {
+            border-color: var(--sun-400);
+            color: var(--sun-500);
+        }
+
+        .compare-btn.selected {
+            background: var(--sun-500);
+            border-color: var(--sun-500);
+            color: white;
+        }
+
+        .card.compare-selected {
+            border-color: var(--sun-500);
+            box-shadow: 0 0 0 3px rgba(232, 163, 23, 0.2);
+        }
+
+        /* --- COMPARE BAR (bottom sticky) --- */
+        .compare-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--ink-900);
+            color: white;
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
+        }
+
+        .compare-bar.visible {
+            transform: translateY(0);
+        }
+
+        .compare-bar-slots {
+            display: flex;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .compare-slot {
+            flex: 1;
+            max-width: 280px;
+            padding: 0.55rem 1rem;
+            border: 1.5px dashed rgba(255,255,255,0.18);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            min-height: 42px;
+        }
+
+        .compare-slot.filled {
+            border-color: var(--sun-400);
+            border-style: solid;
+        }
+
+        .compare-slot-text { line-height: 1.3; }
+
+        .compare-slot-manufacturer {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--sun-400);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .compare-slot-model {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .compare-slot-empty {
+            color: rgba(255,255,255,0.28);
+            font-size: 0.82rem;
+            font-style: italic;
+        }
+
+        .compare-slot-remove {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.35);
+            cursor: pointer;
+            padding: 2px 4px;
+            font-size: 1rem;
+            line-height: 1;
+            transition: color 0.2s;
+            flex-shrink: 0;
+        }
+
+        .compare-slot-remove:hover { color: white; }
+
+        .compare-bar-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .compare-go-btn {
+            padding: 0.6rem 1.4rem;
+            background: var(--sun-500);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, opacity 0.2s;
+        }
+
+        .compare-go-btn:hover { background: var(--sun-400); }
+
+        .compare-go-btn:disabled {
+            opacity: 0.35;
+            cursor: default;
+        }
+
+        .compare-clear-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.38);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .compare-clear-btn:hover { color: white; }
+
+        /* --- COMPARE OVERLAY + PANEL --- */
+        .compare-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 26, 46, 0.55);
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .compare-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .compare-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(860px, 96vw);
+            background: var(--bg);
+            z-index: 201;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .compare-panel.open { transform: translateX(0); }
+
+        .compare-panel-header {
+            background: var(--ink-900);
+            color: white;
+            padding: 1.4rem 1.5rem 1.1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .compare-panel-title { flex: 1; }
+
+        .compare-panel-sublabel {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sun-400);
+            margin-bottom: 0.3rem;
+        }
+
+        .compare-panel-heading {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .compare-vs {
+            font-size: 0.7rem;
+            color: var(--ink-300);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .compare-close-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+
+        .compare-close-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* Sticky column headers inside panel */
+        .compare-cols-header {
+            display: grid;
+            grid-template-columns: 170px 1fr 1fr;
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--ink-100);
+            position: sticky;
+            top: 0;
+            z-index: 9;
+        }
+
+        .compare-col-header {
+            padding: 0.9rem 1.1rem;
+            border-right: 1px solid var(--ink-100);
+        }
+
+        .compare-col-header:last-child { border-right: none; }
+
+        .compare-col-manufacturer {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sun-500);
+            margin-bottom: 0.2rem;
+        }
+
+        .compare-col-model {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--ink-900);
+            line-height: 1.3;
+        }
+
+        .compare-col-sub {
+            font-size: 0.75rem;
+            color: var(--ink-300);
+            margin-top: 0.1rem;
+        }
+
+        /* Groups */
+        .compare-group-label {
+            padding: 0.55rem 1.1rem;
+            background: var(--ink-900);
+            color: var(--sun-400);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .compare-row {
+            display: grid;
+            grid-template-columns: 170px 1fr 1fr;
+            border-bottom: 1px solid var(--ink-100);
+        }
+
+        .compare-row:hover { background: rgba(232, 163, 23, 0.03); }
+
+        .compare-field-label {
+            padding: 0.65rem 1.1rem;
+            font-size: 0.76rem;
+            color: var(--ink-500);
+            border-right: 1px solid var(--ink-100);
+            display: flex;
+            align-items: center;
+            background: rgba(245, 243, 239, 0.6);
+        }
+
+        .compare-field-value {
+            padding: 0.65rem 1.1rem;
+            font-size: 0.86rem;
+            color: var(--ink-900);
+            border-right: 1px solid var(--ink-100);
+            display: flex;
+            align-items: center;
+            word-break: break-word;
+        }
+
+        .compare-field-value:last-child { border-right: none; }
+
+        .compare-field-value.null-val {
+            color: var(--ink-300);
+            font-style: italic;
+        }
+
+        .compare-field-value.better {
+            color: #1a7a42;
+            font-weight: 700;
+        }
+
+        .compare-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .compare-tag {
+            padding: 0.2rem 0.5rem;
+            background: var(--bg);
+            border: 1px solid var(--ink-100);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: var(--ink-500);
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 640px) {
             header { padding: 2rem 1.2rem 1.5rem; }
@@ -516,6 +870,13 @@
             .submit-section { padding-left: 1.2rem; padding-right: 1.2rem; }
             .submit-form { grid-template-columns: 1fr; }
             .submit-chevron { flex-shrink: 0; }
+            .compare-bar { flex-direction: column; align-items: stretch; gap: 0.75rem; padding: 1rem; }
+            .compare-bar-slots { flex-direction: column; }
+            .compare-slot { max-width: none; }
+            .compare-panel { width: 100vw; }
+            .compare-row, .compare-cols-header { grid-template-columns: 130px 1fr 1fr; }
+            .compare-field-label { font-size: 0.7rem; padding: 0.55rem 0.7rem; }
+            .compare-field-value { padding: 0.55rem 0.7rem; font-size: 0.78rem; }
         }
     </style>
 </head>
@@ -629,6 +990,28 @@
     </div>
 </div>
 
+<!-- COMPARE BAR -->
+<div class="compare-bar" id="compareBar">
+    <div class="compare-bar-slots" id="compareBarSlots"></div>
+    <div class="compare-bar-actions">
+        <button class="compare-clear-btn" id="compareClearBtn">Cancella tutto</button>
+        <button class="compare-go-btn" id="compareGoBtn" disabled>Confronta →</button>
+    </div>
+</div>
+
+<!-- COMPARE OVERLAY + PANEL -->
+<div class="compare-overlay" id="compareOverlay"></div>
+<div class="compare-panel" id="comparePanel">
+    <div class="compare-panel-header">
+        <div class="compare-panel-title">
+            <div class="compare-panel-sublabel">Confronto pannelli</div>
+            <div class="compare-panel-heading" id="comparePanelHeading"></div>
+        </div>
+        <button class="compare-close-btn" id="compareCloseBtn">✕</button>
+    </div>
+    <div id="comparePanelBody"></div>
+</div>
+
 <script>
 // Collapsible submit section
 document.getElementById('submitToggle').addEventListener('click', function() {
@@ -651,6 +1034,7 @@ document.getElementById('fileInput').addEventListener('change', function() {
 
 <script>
 let panels = [];
+let compareSelection = []; // max 2 panels
 
 // --- DOM refs ---
 const searchInput = document.getElementById('searchInput');
@@ -662,8 +1046,8 @@ const cardsGrid = document.getElementById('cardsGrid');
 const emptyState = document.getElementById('emptyState');
 const statsBar = document.getElementById('statsBar');
 
-// --- Load data from JSON file ---
-fetch('pannelli_solari.json')
+// --- Load data from detailed JSON ---
+fetch('pannelli_fotovoltaici.json')
     .then(r => r.json())
     .then(data => {
         panels = data;
@@ -708,9 +1092,12 @@ function renderCards(filtered) {
     statsBar.textContent = filtered.length + ' pannell' + (filtered.length === 1 ? 'o trovato' : 'i trovati') + ' su ' + panels.length;
 
     filtered.forEach(panel => {
+        const panelId = panel.produttore + '|||' + panel.modello;
+        const isSelected = compareSelection.some(p => p.produttore + '|||' + p.modello === panelId);
         const annoDisplay = panel.anno ? panel.anno : '—';
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card' + (isSelected ? ' compare-selected' : '');
+        card.dataset.panelId = panelId;
         card.innerHTML = `
             <div class="card-header">
                 <span class="card-manufacturer">${panel.produttore}</span>
@@ -728,11 +1115,17 @@ function renderCards(filtered) {
                     <div class="spec-value">${panel.efficienza}%</div>
                 </div>
             </div>
-            <a href="${panel.pdf}" class="card-download" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16"/></svg>
-                Scarica PDF
-            </a>
+            <div class="card-footer">
+                <a href="${panel.pdf}" class="card-download" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16"/></svg>
+                    Scarica PDF
+                </a>
+                <button class="compare-btn${isSelected ? ' selected' : ''}" data-panel-id="${panelId}">
+                    ${isSelected ? '✓ Selezionato' : '+ Confronta'}
+                </button>
+            </div>
         `;
+        card.querySelector('.compare-btn').addEventListener('click', () => toggleCompare(panel));
         cardsGrid.appendChild(card);
     });
 }
@@ -766,6 +1159,301 @@ filterProduttore.addEventListener('change', applyFilters);
 filterAnno.addEventListener('change', applyFilters);
 filterPotenzaMin.addEventListener('input', applyFilters);
 filterEfficienzaMin.addEventListener('input', applyFilters);
+
+// =============================================
+// COMPARE LOGIC
+// =============================================
+
+function toggleCompare(panel) {
+    const id = panel.produttore + '|||' + panel.modello;
+    const idx = compareSelection.findIndex(p => p.produttore + '|||' + p.modello === id);
+
+    if (idx !== -1) {
+        compareSelection.splice(idx, 1);
+    } else {
+        if (compareSelection.length >= 2) return; // max 2
+        compareSelection.push(panel);
+    }
+
+    updateCompareBar();
+    // Update card visual state without full re-render
+    document.querySelectorAll('.card').forEach(card => {
+        const cardId = card.dataset.panelId;
+        const sel = compareSelection.some(p => p.produttore + '|||' + p.modello === cardId);
+        card.classList.toggle('compare-selected', sel);
+        const btn = card.querySelector('.compare-btn');
+        if (btn) {
+            btn.classList.toggle('selected', sel);
+            btn.textContent = sel ? '✓ Selezionato' : '+ Confronta';
+        }
+    });
+}
+
+function updateCompareBar() {
+    const bar = document.getElementById('compareBar');
+    const slotsEl = document.getElementById('compareBarSlots');
+    const goBtn = document.getElementById('compareGoBtn');
+
+    if (compareSelection.length === 0) {
+        bar.classList.remove('visible');
+        return;
+    }
+
+    bar.classList.add('visible');
+    goBtn.disabled = compareSelection.length < 2;
+
+    slotsEl.innerHTML = '';
+    for (let i = 0; i < 2; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'compare-slot' + (compareSelection[i] ? ' filled' : '');
+        if (compareSelection[i]) {
+            const p = compareSelection[i];
+            slot.innerHTML = `
+                <div class="compare-slot-text">
+                    <div class="compare-slot-manufacturer">${p.produttore}</div>
+                    <div class="compare-slot-model">${p.modello}</div>
+                </div>
+                <button class="compare-slot-remove" data-idx="${i}" title="Rimuovi">✕</button>
+            `;
+            slot.querySelector('.compare-slot-remove').addEventListener('click', () => {
+                const panel = compareSelection[i];
+                toggleCompare(panel);
+            });
+        } else {
+            slot.innerHTML = `<span class="compare-slot-empty">Seleziona un pannello…</span>`;
+        }
+        slotsEl.appendChild(slot);
+    }
+}
+
+document.getElementById('compareClearBtn').addEventListener('click', () => {
+    compareSelection = [];
+    updateCompareBar();
+    document.querySelectorAll('.card').forEach(card => {
+        card.classList.remove('compare-selected');
+        const btn = card.querySelector('.compare-btn');
+        if (btn) { btn.classList.remove('selected'); btn.textContent = '+ Confronta'; }
+    });
+});
+
+document.getElementById('compareGoBtn').addEventListener('click', openComparePanel);
+document.getElementById('compareCloseBtn').addEventListener('click', closeComparePanel);
+document.getElementById('compareOverlay').addEventListener('click', closeComparePanel);
+
+function openComparePanel() {
+    if (compareSelection.length < 2) return;
+    renderComparePanel(compareSelection[0], compareSelection[1]);
+    document.getElementById('compareOverlay').classList.add('open');
+    document.getElementById('comparePanel').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeComparePanel() {
+    document.getElementById('compareOverlay').classList.remove('open');
+    document.getElementById('comparePanel').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// ---- Compare panel rendering ----
+
+const COMPARE_GROUPS = [
+    {
+        label: 'Informazioni generali',
+        fields: [
+            { key: 'anno', label: 'Anno' },
+            { key: 'tecnologia_celle', label: 'Tecnologia celle' },
+            { key: 'tipo_modulo', label: 'Tipo modulo' },
+            { key: 'bifacciale', label: 'Bifacciale', format: v => v === true ? 'Sì' : v === false ? 'No' : null },
+            { key: 'num_celle', label: 'N° celle' },
+            { key: 'dimensioni_celle_mm', label: 'Dim. celle' },
+            { key: 'busbar', label: 'Busbar' },
+            { key: 'half_cell', label: 'Half-Cell', format: v => v === true ? 'Sì' : v === false ? 'No' : null },
+        ]
+    },
+    {
+        label: 'Potenza STC',
+        fields: [
+            { key: 'potenza_watt', label: 'Potenza nominale', unit: 'W', higherBetter: true },
+            { key: 'potenza_watt_min', label: 'Range potenza min', unit: 'W' },
+            { key: 'potenza_watt_max', label: 'Range potenza max', unit: 'W' },
+            { key: 'tolleranza_potenza', label: 'Tolleranza potenza' },
+            { key: 'efficienza', label: 'Efficienza', unit: '%', higherBetter: true },
+            { key: 'vmp_V', label: 'Vmp', unit: 'V' },
+            { key: 'imp_A', label: 'Imp', unit: 'A' },
+            { key: 'voc_V', label: 'Voc', unit: 'V' },
+            { key: 'isc_A', label: 'Isc', unit: 'A' },
+        ]
+    },
+    {
+        label: 'Potenza NMOT',
+        fields: [
+            { key: 'pmax_NMOT_W', label: 'Pmax NMOT', unit: 'W', higherBetter: true },
+            { key: 'vmp_NMOT_V', label: 'Vmp NMOT', unit: 'V' },
+            { key: 'imp_NMOT_A', label: 'Imp NMOT', unit: 'A' },
+            { key: 'voc_NMOT_V', label: 'Voc NMOT', unit: 'V' },
+            { key: 'isc_NMOT_A', label: 'Isc NMOT', unit: 'A' },
+            { key: 'NMOT_gradi_C', label: 'NMOT', unit: '°C' },
+        ]
+    },
+    {
+        label: 'Coefficienti di temperatura',
+        fields: [
+            { key: 'coeff_temp_pmax_pct_K', label: 'Coeff. Pmax', unit: '%/K' },
+            { key: 'coeff_temp_voc_pct_K', label: 'Coeff. Voc', unit: '%/K' },
+            { key: 'coeff_temp_isc_pct_K', label: 'Coeff. Isc', unit: '%/K' },
+        ]
+    },
+    {
+        label: 'Dati elettrici di sistema',
+        fields: [
+            { key: 'tensione_sistema_max_V', label: 'Tensione sistema max', unit: 'V' },
+            { key: 'corrente_inversa_max_A', label: 'Corrente inversa max', unit: 'A' },
+        ]
+    },
+    {
+        label: 'Resistenza meccanica',
+        fields: [
+            { key: 'carico_max_Pa', label: 'Carico pressione max', unit: 'Pa', higherBetter: true },
+            { key: 'carico_min_depressione_Pa', label: 'Carico depressione max', unit: 'Pa', higherBetter: true },
+            { key: 'temperatura_funzionamento_gradi_C', label: 'Temp. funzionamento', unit: '°C' },
+            { key: 'temperatura_ambiente_gradi_C', label: 'Temp. ambiente', unit: '°C' },
+        ]
+    },
+    {
+        label: 'Costruzione',
+        fields: [
+            { key: 'vetro_frontale', label: 'Vetro frontale' },
+            { key: 'materiale_retro', label: 'Materiale retro' },
+            { key: 'cornice', label: 'Cornice' },
+            { key: 'scatola_giunzione_IP', label: 'Scatola giunzione' },
+            { key: 'num_diodi_bypass', label: 'Diodi bypass' },
+            { key: 'connettore', label: 'Connettore' },
+            { key: 'sezione_cavi_mm2', label: 'Sezione cavi', unit: 'mm²' },
+            { key: 'lunghezza_cavi_m', label: 'Lunghezza cavi', unit: 'm' },
+            { key: 'classe_protezione', label: 'Classe protezione' },
+            { key: 'classe_fuoco', label: 'Classe fuoco' },
+        ]
+    },
+    {
+        label: 'Dimensioni e peso',
+        fields: [
+            { key: 'dimensioni_mm', label: 'Dimensioni', unit: 'mm' },
+            { key: 'peso_kg', label: 'Peso', unit: 'kg' },
+            { key: 'moduli_per_pallet', label: 'Moduli per pallet' },
+            { key: 'peso_pallet_kg', label: 'Peso pallet', unit: 'kg' },
+        ]
+    },
+    {
+        label: 'Garanzia',
+        fields: [
+            { key: 'garanzia_prodotto_anni', label: 'Garanzia prodotto', unit: 'anni', higherBetter: true },
+            { key: 'garanzia_prestazioni_anni', label: 'Garanzia prestazioni', unit: 'anni', higherBetter: true },
+            { key: 'garanzia_prestazioni_pct', label: 'Prestazioni garantite', unit: '%', higherBetter: true },
+            { key: 'degrado_annuo_pct', label: 'Degrado annuo', unit: '%/anno' },
+        ]
+    },
+    {
+        label: 'Certificazioni',
+        fields: [
+            { key: 'certificazioni', label: 'Certificazioni', isArray: true },
+            { key: 'tecnologie_speciali', label: 'Tecnologie speciali', isArray: true },
+        ]
+    },
+];
+
+function formatVal(val, field) {
+    if (field.format) return field.format(val);
+    if (val === null || val === undefined || val === '' || val === '-') return null;
+    if (field.isArray) return val;
+    return String(val) + (field.unit ? ' ' + field.unit : '');
+}
+
+function renderComparePanel(p1, p2) {
+    // Heading
+    document.getElementById('comparePanelHeading').innerHTML =
+        `<span>${p1.modello}</span><span class="compare-vs">vs</span><span>${p2.modello}</span>`;
+
+    const body = document.getElementById('comparePanelBody');
+    body.innerHTML = '';
+
+    // Column headers
+    const colsHeader = document.createElement('div');
+    colsHeader.className = 'compare-cols-header';
+    colsHeader.innerHTML = `
+        <div class="compare-col-header"></div>
+        <div class="compare-col-header">
+            <div class="compare-col-manufacturer">${p1.produttore}</div>
+            <div class="compare-col-model">${p1.modello}</div>
+            <div class="compare-col-sub">${p1.potenza_watt}W · ${p1.efficienza}%</div>
+        </div>
+        <div class="compare-col-header">
+            <div class="compare-col-manufacturer">${p2.produttore}</div>
+            <div class="compare-col-model">${p2.modello}</div>
+            <div class="compare-col-sub">${p2.potenza_watt}W · ${p2.efficienza}%</div>
+        </div>
+    `;
+    body.appendChild(colsHeader);
+
+    COMPARE_GROUPS.forEach(group => {
+        // Filter out fields where both values are null/empty
+        const visibleFields = group.fields.filter(f => {
+            const v1 = formatVal(p1[f.key], f);
+            const v2 = formatVal(p2[f.key], f);
+            if (f.isArray) return (p1[f.key] && p1[f.key].length > 0) || (p2[f.key] && p2[f.key].length > 0);
+            return v1 !== null || v2 !== null;
+        });
+
+        if (visibleFields.length === 0) return;
+
+        const groupLabel = document.createElement('div');
+        groupLabel.className = 'compare-group-label';
+        groupLabel.textContent = group.label;
+        body.appendChild(groupLabel);
+
+        visibleFields.forEach(field => {
+            const raw1 = p1[field.key];
+            const raw2 = p2[field.key];
+            const v1 = formatVal(raw1, field);
+            const v2 = formatVal(raw2, field);
+
+            // Determine better value for numeric higherBetter fields
+            let b1 = false, b2 = false;
+            if (field.higherBetter && typeof raw1 === 'number' && typeof raw2 === 'number' && raw1 !== raw2) {
+                b1 = raw1 > raw2;
+                b2 = raw2 > raw1;
+            }
+
+            const row = document.createElement('div');
+            row.className = 'compare-row';
+
+            let cell1Html, cell2Html;
+
+            if (field.isArray) {
+                cell1Html = renderArrayCell(raw1);
+                cell2Html = renderArrayCell(raw2);
+            } else {
+                cell1Html = v1 !== null ? escHtml(v1) : '<span style="color:var(--ink-300);font-style:italic">—</span>';
+                cell2Html = v2 !== null ? escHtml(v2) : '<span style="color:var(--ink-300);font-style:italic">—</span>';
+            }
+
+            row.innerHTML = `
+                <div class="compare-field-label">${escHtml(field.label)}</div>
+                <div class="compare-field-value${b1 ? ' better' : (v1 === null && !field.isArray ? ' null-val' : '')}">${cell1Html}</div>
+                <div class="compare-field-value${b2 ? ' better' : (v2 === null && !field.isArray ? ' null-val' : '')}">${cell2Html}</div>
+            `;
+            body.appendChild(row);
+        });
+    });
+}
+
+function renderArrayCell(arr) {
+    if (!arr || arr.length === 0) return '<span style="color:var(--ink-300);font-style:italic">—</span>';
+    return '<div class="compare-tags">' + arr.map(t => `<span class="compare-tag">${escHtml(t)}</span>`).join('') + '</div>';
+}
+
+function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 </script>
 
 </body>
